@@ -17,11 +17,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>hu.dpc.openbank.fpp.lionfintech</groupId>
+    <groupId>hu.dpc.openbank.fpp.fppfintech</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>LIONfintech backend</name>
-    <description>LIONFintech BankEnd</description>
+    <name>FPPfintech backend</name>
+    <description>FPPFintech BankEnd</description>
 
     <properties>
         <java.version>11</java.version>
