@@ -36,5 +36,5 @@ services:
 #    command: [nginx-debug, '-g', 'daemon off;']
     ports:
       - 80:80
-#      - 443:443
+      - 443:443
 #      - 8081:8081
