@@ -13,19 +13,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AccountConsentRepository extends JpaRepository<AccountConsent, String> {
-    /**
-     * Get Consent
-     *
-     * @param bankId
-     * @param userName
-     * @return
-     */
-    @Query(value = "select *\n" //
-            + "from ACCOUNT_CONSENT \n" //
-            + "where BANKID = :bankid\n" //
-            + "  and USERNAME = :userName", nativeQuery = true)
-    AccountConsent getConsent(@Param("bankid") String bankId, @Param("userName") String userName);
+
+  /**
+   * Get Consent
+   */
+  @Transactional(readOnly = true)
+  @Query(value = "select *\n" //
+      + "from ACCOUNT_CONSENT \n" //
+      + "where BANKID = :bankid\n" //
+      + "  and USERNAME = :userName", nativeQuery = true)
+  AccountConsent getConsent(@Param("bankid") String bankId, @Param("userName") String userName);
 }

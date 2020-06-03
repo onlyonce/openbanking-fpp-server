@@ -8,90 +8,110 @@
 
 package hu.dpc.openbank.fpp.lionfintech.backend.enity.bank;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "ACCESS_TOKEN")
 public class AccessToken {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue
-    private int    id;
-    @Column(name = "BANK_ID")
-    private String bankId;
-    @Column(name = "USERNAME")
-    private String userName;
-    @Column(name = "ACCESS_TOKEN")
-    private String accessToken;
-    @Column(name = "ACCESS_TOKEN_TYPE")
-    private String accessTokenType;
-    @Column(name = "EXPIRES")
-    private long   expires;
-    @Column(name = "REFRESH_TOKEN")
-    private String refreshToken;
 
-    public int getId() {
-        return id;
-    }
+  @Id
+  @Column(name = "ID")
+  @GeneratedValue
+  private int id;
+  @Column(name = "BANK_ID")
+  private String bankId;
+  @Column(name = "USERNAME")
+  private String userName;
+  @Column(name = "ACCESS_TOKEN")
+  private String accessToken;
+  @Column(name = "ACCESS_TOKEN_TYPE")
+  private String accessTokenType;
+  @Column(name = "EXPIRES")
+  private long expires;
+  @Column(name = "REFRESH_TOKEN")
+  private String refreshToken;
 
-    public void setId(final int id) {
-        this.id = id;
-    }
 
-    public String getBankId() {
-        return bankId;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setBankId(final String bankId) {
-        this.bankId = bankId;
-    }
 
-    public String getUserName() {
-        return userName;
-    }
+  public void setId(final int id) {
+    this.id = id;
+  }
 
-    public void setUserName(final String userName) {
-        this.userName = userName;
-    }
 
-    public String getAccessToken() {
-        return accessToken;
-    }
+  public String getBankId() {
+    return bankId;
+  }
 
-    public void setAccessToken(final String accessToken) {
-        this.accessToken = accessToken;
-    }
 
-    public String getAccessTokenType() {
-        return accessTokenType;
-    }
+  public void setBankId(final String bankId) {
+    this.bankId = bankId;
+  }
 
-    public void setAccessTokenType(final String accessTokenType) {
-        this.accessTokenType = accessTokenType;
-    }
 
-    public long getExpires() {
-        return expires;
-    }
+  public String getUserName() {
+    return userName;
+  }
 
-    public void setExpires(final long expires) {
-        this.expires = expires;
-    }
 
-    public String getRefreshToken() {
-        return refreshToken;
-    }
+  public void setUserName(final String userName) {
+    this.userName = userName;
+  }
 
-    public void setRefreshToken(final String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 
-    /**
-     * Token is expired?
-     *
-     * @return
-     */
-    public boolean isExpired() {
-        return (System.currentTimeMillis() - 3000L) > expires;
-    }
+  public String getAccessToken() {
+    return accessToken;
+  }
+
+
+  public void setAccessToken(final String accessToken) {
+    this.accessToken = accessToken;
+  }
+
+
+  public String getAccessTokenType() {
+    return accessTokenType;
+  }
+
+
+  public void setAccessTokenType(final String accessTokenType) {
+    this.accessTokenType = accessTokenType;
+  }
+
+
+  public long getExpires() {
+    return expires;
+  }
+
+
+  public void setExpires(final long expires) {
+    this.expires = expires;
+  }
+
+
+  public String getRefreshToken() {
+    return refreshToken;
+  }
+
+
+  public void setRefreshToken(final String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+
+  /**
+   * Token is expired?
+   *
+   * @return token is expired?
+   */
+  public boolean isExpired() {
+    return (System.currentTimeMillis() - 3000L) > expires;
+  }
 }

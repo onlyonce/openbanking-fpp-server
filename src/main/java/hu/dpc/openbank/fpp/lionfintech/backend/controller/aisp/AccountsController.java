@@ -10,41 +10,43 @@ package hu.dpc.openbank.fpp.lionfintech.backend.controller.aisp;
 
 
 import hu.dpc.openbank.fpp.lionfintech.backend.controller.WSO2Controller;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/aisp/v1/")
 public class AccountsController extends WSO2Controller {
-    /**
-     * GetAccounts
-     *
-     * @param bankId
-     * @param user
-     * @return
-     */
-    @GetMapping(path = "accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getAccounts(@RequestHeader(WSO2Controller.X_TPP_BANKID) final @NotNull String bankId, @AuthenticationPrincipal final @NotNull User user) {
-        return handleAccounts(HttpMethod.GET, bankId, user, "/accounts", null);
-    }
+
+  /**
+   * GetAccounts
+   */
+  @GetMapping(path = "accounts", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<String> getAccounts(@RequestHeader(WSO2Controller.X_TPP_BANKID) final @Nonnull String bankId,
+      @AuthenticationPrincipal final @Nonnull User user) {
+    log.info("Called GET /aisp/v1/accounts");
+    return handleAccounts(HttpMethod.GET, bankId, user, "/accounts", null);
+  }
 
 
-    /**
-     * Get one account
-     *
-     * @param bankId
-     * @param user
-     * @param accountId
-     * @return
-     */
-    @GetMapping(path = "accounts/{AccountId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getAccount(@RequestHeader(WSO2Controller.X_TPP_BANKID) final @NotNull String bankId, @AuthenticationPrincipal final @NotNull User user, @PathVariable(ACCOUNT_ID) final String accountId) {
-        return handleAccounts(HttpMethod.GET, bankId, user, "/accounts/" + accountId, null);
-    }
+  /**
+   * Get one account
+   */
+  @GetMapping(path = "accounts/{AccountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<String> getAccount(@RequestHeader(WSO2Controller.X_TPP_BANKID) final @Nonnull String bankId,
+      @AuthenticationPrincipal final @Nonnull User user, @PathVariable(ACCOUNT_ID) final String accountId) {
+    log.info("Called GET /aisp/v1/accounts/{AccountId}  {}", accountId);
+    return handleAccounts(HttpMethod.GET, bankId, user, "/accounts/" + accountId, null);
+  }
 
 }

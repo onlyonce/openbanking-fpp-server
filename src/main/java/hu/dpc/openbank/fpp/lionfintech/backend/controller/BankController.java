@@ -9,26 +9,32 @@
 package hu.dpc.openbank.fpp.lionfintech.backend.controller;
 
 
-import hu.dpc.openbank.fpp.lionfintech.backend.repository.BankRepository;
 import hu.dpc.openbank.fpp.lionfintech.backend.enity.bank.SupportedBanks;
+import hu.dpc.openbank.fpp.lionfintech.backend.repository.BankRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/banks/v1/")
 public class BankController {
-    private final BankRepository bankRepository;
 
-    public BankController(final BankRepository bankRepository) {
-        this.bankRepository = bankRepository;
-    }
+  private final BankRepository bankRepository;
 
-    @GetMapping(path = "/supported", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SupportedBanks getSupportedBanks() {
-        final SupportedBanks supportedBanks = new SupportedBanks();
-        supportedBanks.setBankInfoList(bankRepository.findAll());
-        return supportedBanks;
-    }
+
+  public BankController(final BankRepository bankRepository) {
+    this.bankRepository = bankRepository;
+  }
+
+
+  @GetMapping(path = "/supported", produces = MediaType.APPLICATION_JSON_VALUE)
+  public SupportedBanks getSupportedBanks() {
+    log.info("Called GET /banks/v1/supported");
+    final SupportedBanks supportedBanks = new SupportedBanks();
+    supportedBanks.setBankInfoList(bankRepository.findAll());
+    return supportedBanks;
+  }
 }
